@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,25 +21,38 @@ public class Login_stepDefinition {
 
     @Given("User is on the login page")
     public void user_is_on_the_login_page() {
-        //  WebDriverManager.chromedriver().setup();
+        //WebDriverManager.chromedriver().setup();
         String url = ConfigurationReader.getProperty("urlVyTrack");
         Driver.getDriver().get(url);
         Driver.getDriver().manage().window().maximize();
-        wait.until(ExpectedConditions.visibilityOf(loginPage.username));
-        String actual = Driver.getDriver().getTitle();
-        String expected = "Login";
-        Assert.assertEquals("Title is wrong", expected, actual);
+        //wait.until(ExpectedConditions.visibilityOf(loginPage.username));
+        //String actual = Driver.getDriver().getTitle();
+        //String expected = "Login";
+        //Assert.assertEquals("Title is wrong", expected, actual);
+
 
     }
 
     @When("User enters credential")
     public void user_enters_credential() {
+        String username=ConfigurationReader.getProperty("UsernameTruckDriver1");
+        String password=ConfigurationReader.getProperty("passwordVyTrack");
+
+        loginPage.login(username,password);
+
+
+
 
 
     }
 
     @Then("User name should be displayed")
     public void user_name_should_be_displayed() {
+
+
+        String actual=Driver.getDriver().getTitle();
+        String expected="Dashboard";
+        Assert.assertEquals("Title is not matching!!!",actual,expected);
 
 
     }
