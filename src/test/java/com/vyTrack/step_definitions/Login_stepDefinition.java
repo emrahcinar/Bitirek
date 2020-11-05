@@ -51,7 +51,7 @@ public class Login_stepDefinition {
 
 
         String actual=Driver.getDriver().getTitle();
-        String expected="Dashboardd";
+        String expected="Dashboard";
         Assert.assertEquals("Title is not matching!!!",actual,expected);
 
 

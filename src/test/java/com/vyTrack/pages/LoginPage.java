@@ -2,6 +2,7 @@ package com.vyTrack.pages;
 
 import com.vyTrack.utilities.ConfigurationReader;
 import com.vyTrack.utilities.Driver;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,12 +13,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    //  Logger logger=Logger.getLogger();
+    Logger logger = Logger.getLogger(LoginPage.class);
 
     public LoginPage() {
         PageFactory.initElements(Driver.getDriver(), this);
 
     }
-
 
     @FindBy(id = "prependedInput")
     private WebElement username;
@@ -34,12 +36,11 @@ public class LoginPage {
     public void login(String user, String pass) {
 
 
-
         username.sendKeys(user);
         password.sendKeys(pass);
         wait.until(ExpectedConditions.elementToBeClickable(login)).click();
         wait.until(ExpectedConditions.titleIs("Dashboard"));
-
+        logger.info("Login with "+ user+" and "+pass);
 
 
     }
